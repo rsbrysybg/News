@@ -1,0 +1,70 @@
+<view class="container tabbar-safe-bottom">
+  <view class="card">
+    <swiper
+      wx:if="{{topReadList.length>0}}"
+      class="top-swiper"
+      circular
+      autoplay
+      interval="4000"
+      indicator-dots
+      indicator-color="rgba(255,255,255,0.6)"
+      indicator-active-color="#ffffff"
+    >
+      <block wx:for="{{topReadList}}" wx:key="_id">
+        <swiper-item>
+          <view class="top-swiper-item" data-id="{{item._id}}" bindtap="onTapTopRead">
+            <image class="top-img" mode="aspectFill" src="{{item.coverImg}}" />
+            <view class="top-mask"></view>
+            <view class="top-title">{{item.title}}</view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <input
+      class="search-input"
+      placeholder="搜索新闻标题"
+      confirm-type="search"
+      value="{{keyword}}"
+      bindinput="onKeywordInput"
+      bindconfirm="onSearch"
+    />
+
+    <scroll-view scroll-x class="tabs">
+      <view class="tabs-inner">
+        <block wx:for="{{categories}}" wx:key="name">
+          <view
+            class="tab {{activeCategory===item.name?'tab-active':''}}"
+            data-name="{{item.name}}"
+            bindtap="onTabTap"
+          >
+            {{item.name}}
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="list">
+    <block wx:for="{{newsList}}" wx:key="_id">
+      <view class="card item" data-id="{{item._id}}" bindtap="goDetail">
+        <view class="item-left">
+          <view class="item-title">{{item.title}}</view>
+          <view class="muted item-sub">{{item.summary}}</view>
+          <view class="muted item-meta">
+            <text>{{item.author}}</text>
+            <text class="dot">·</text>
+            <text>{{item.publishDateText}}</text>
+            <text class="dot">·</text>
+            <text>阅读 {{item.viewCount}}</text>
+          </view>
+        </view>
+        <image class="item-img" mode="aspectFill" src="{{item.coverImg}}" />
+      </view>
+    </block>
+
+    <view wx:if="{{loading}}" class="muted footer">加载中...</view>
+    <view wx:elif="{{!loading && newsList.length===0}}" class="muted footer">暂无数据</view>
+    <view wx:elif="{{!loading && !hasMore}}" class="muted footer">没有更多了</view>
+  </view>
+</view>

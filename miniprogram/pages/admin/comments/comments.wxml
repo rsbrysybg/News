@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">最新评论</view>
+
+    <block wx:for="{{list}}" wx:key="_id">
+      <view class="comment-item">
+        <view class="head">
+          <view class="name">{{item.userInfo.nickName}}</view>
+          <view class="muted time">{{item.createTimeText}}</view>
+          <view class="status {{item.status===1?'status-hide':(item.status===2?'status-pending':'')}}">
+            {{item.status===2?'待审核':(item.status===1?'已下架':'已上架')}}
+          </view>
+        </view>
+        <view class="muted newsid">newsId: {{item.newsId}}</view>
+        <view class="body">{{item.content}}</view>
+
+        <view class="actions">
+          <button
+            wx:if="{{item.status!==0}}"
+            class="btn-primary btn-mini"
+            data-id="{{item._id}}"
+            bindtap="upComment"
+          >
+            上架
+          </button>
+
+          <button class="btn-danger btn-mini" data-id="{{item._id}}" bindtap="deleteComment">删除</button>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{loading}}" class="muted footer">加载中...</view>
+    <view wx:elif="{{!loading && list.length===0}}" class="muted footer">暂无评论</view>
+  </view>
+</view>

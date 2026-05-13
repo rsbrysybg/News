@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="card">
+    <view class="muted">关键词：{{keyword}}</view>
+  </view>
+
+  <view class="list">
+    <block wx:for="{{newsList}}" wx:key="_id">
+      <view class="card item" data-id="{{item._id}}" bindtap="goDetail">
+        <view class="item-left">
+          <view class="item-title">{{item.title}}</view>
+          <view class="muted item-sub">{{item.summary}}</view>
+          <view class="muted item-meta">
+            <text>{{item.author}}</text>
+            <text class="dot">·</text>
+            <text>{{item.publishDateText}}</text>
+            <text class="dot">·</text>
+            <text>阅读 {{item.viewCount}}</text>
+          </view>
+        </view>
+        <image class="item-img" mode="aspectFill" src="{{item.coverImg}}" />
+      </view>
+    </block>
+
+    <view wx:if="{{loading}}" class="muted footer">加载中...</view>
+    <view wx:elif="{{!loading && newsList.length===0}}" class="muted footer">暂无数据</view>
+    <view wx:elif="{{!loading && !hasMore}}" class="muted footer">没有更多了</view>
+  </view>
+</view>

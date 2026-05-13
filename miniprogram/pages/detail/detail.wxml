@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="card">
+    <view class="title">{{detail.title}}</view>
+    <view class="muted meta">
+      <text>{{detail.author}}</text>
+      <text class="dot">·</text>
+      <text>{{detail.publishDateText}}</text>
+      <text class="dot">·</text>
+      <text>阅读 {{detail.viewCount}}</text>
+    </view>
+
+    <image wx:if="{{detail.coverImg}}" class="cover" mode="aspectFill" src="{{detail.coverImg}}" />
+
+    <rich-text class="content" nodes="{{contentNodes}}" />
+
+    <view class="actions">
+      <button class="{{isFavorited?'btn-primary':'btn-plain'}}" bindtap="onToggleFavorite">
+        {{isFavorited ? '已收藏' : '收藏'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="card comments">
+    <view class="comments-title">评论</view>
+    <block wx:for="{{comments}}" wx:key="_id">
+      <view class="comment">
+        <view class="comment-head">
+          <image class="avatar" src="{{item.userInfo.avatarUrl}}" mode="aspectFill" />
+          <view class="comment-name">{{item.userInfo.nickName}}</view>
+          <view class="muted comment-time">{{item.createTimeText}}</view>
+        </view>
+        <view class="comment-body">{{item.content}}</view>
+      </view>
+    </block>
+    <view wx:if="{{loadingComments}}" class="muted footer">加载中...</view>
+    <view wx:elif="{{!loadingComments && comments.length===0}}" class="muted footer">暂无评论</view>
+  </view>
+</view>
+
+<view class="comment-bar">
+  <input
+    class="comment-input"
+    placeholder="写下你的评论"
+    value="{{commentText}}"
+    bindinput="onCommentInput"
+    confirm-type="send"
+    bindconfirm="onSendComment"
+  />
+  <button class="btn-primary send" bindtap="onSendComment">发送</button>
+</view>

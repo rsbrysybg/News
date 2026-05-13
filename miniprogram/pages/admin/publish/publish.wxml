@@ -1,0 +1,74 @@
+<view class="container">
+  <view class="card">
+    <view class="seg">
+      <view class="seg-item {{activeSection==='create'?'seg-active':''}}" data-k="create" bindtap="switchSection">新增新闻</view>
+      <view class="seg-item {{activeSection==='manage'?'seg-active':''}}" data-k="manage" bindtap="switchSection">新闻管理</view>
+    </view>
+  </view>
+
+  <view wx:if="{{activeSection==='create'}}" class="card" style="margin-top: 18rpx;">
+    <view class="section-title">{{form._id ? '编辑新闻' : '新增新闻'}}</view>
+
+    <view class="field">
+      <view class="label">标题</view>
+      <input class="input" value="{{form.title}}" placeholder="请输入标题" bindinput="onInput" data-k="title" />
+    </view>
+
+    <view class="field">
+      <view class="label">作者</view>
+      <input class="input" value="{{form.author}}" placeholder="请输入作者" bindinput="onInput" data-k="author" />
+    </view>
+
+    <view class="field">
+      <view class="label">分类</view>
+      <picker mode="selector" range="{{categoryNames}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker">{{categoryNames[categoryIndex] || '请选择分类'}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <view class="label">摘要</view>
+      <textarea class="textarea" value="{{form.summary}}" placeholder="请输入摘要" bindinput="onInput" data-k="summary" />
+    </view>
+
+    <view class="field">
+      <view class="label">封面图</view>
+      <view class="cover-row">
+        <image wx:if="{{form.coverImg}}" class="cover" src="{{form.coverImg}}" mode="aspectFill" />
+        <button class="btn-plain" bindtap="chooseCover">选择图片</button>
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="label">正文(支持简单HTML/纯文本)</view>
+      <textarea class="textarea content" value="{{form.content}}" placeholder="请输入正文" bindinput="onInput" data-k="content" />
+    </view>
+
+    <view class="actions">
+      <button class="btn-primary" loading="{{saving}}" bindtap="onSave">保存</button>
+      <button wx:if="{{form._id}}" class="btn-plain" bindtap="onCancelEdit">取消编辑</button>
+    </view>
+  </view>
+
+  <view wx:if="{{activeSection==='manage'}}" class="card" style="margin-top: 18rpx;">
+    <view class="section-title">已有新闻</view>
+    <block wx:for="{{newsList}}" wx:key="_id">
+      <view class="news-item">
+        <view class="news-main" data-id="{{item._id}}" bindtap="onEdit">
+          <view class="news-title">{{item.title}}</view>
+          <view class="muted news-meta">
+            <text>{{item.category}}</text>
+            <text class="dot">·</text>
+            <text>{{item.publishDateText}}</text>
+            <text class="dot">·</text>
+            <text>阅读 {{item.viewCount}}</text>
+          </view>
+        </view>
+        <button class="btn-plain" data-id="{{item._id}}" bindtap="onDelete">删除</button>
+      </view>
+    </block>
+
+    <view wx:if="{{loadingList}}" class="muted footer">加载中...</view>
+    <view wx:elif="{{!loadingList && newsList.length===0}}" class="muted footer">暂无新闻</view>
+  </view>
+</view>

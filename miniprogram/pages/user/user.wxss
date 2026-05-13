@@ -1,0 +1,56 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 44rpx;
+  background: #f0f2f5;
+}
+
+.right {
+  flex: 1;
+  margin-left: 18rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.sub {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.fav-item {
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #f0f2f5;
+}
+
+.fav-title {
+  font-size: 28rpx;
+}
+
+.fav-time {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+}
+
+.footer {
+  text-align: center;
+  padding: 18rpx 0;
+}
+
+.admin-actions button {
+  margin-top: 12rpx;
+}

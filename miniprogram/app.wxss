@@ -1,0 +1,41 @@
+page {
+  background: #f6f7f9;
+  color: #1f2329;
+  font-size: 28rpx;
+}
+
+.container {
+  padding: 24rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.btn-primary {
+  background: #1677ff;
+  color: #ffffff;
+  border-radius: 12rpx;
+  padding: 18rpx 24rpx;
+  font-size: 28rpx;
+}
+
+.btn-plain {
+  background: #ffffff;
+  color: #1677ff;
+  border: 2rpx solid #1677ff;
+  border-radius: 12rpx;
+  padding: 16rpx 24rpx;
+  font-size: 28rpx;
+}
+
+.muted {
+  color: #6b7785;
+}
+
+.tabbar-safe-bottom {
+  padding-bottom: 140rpx;
+  box-sizing: border-box;
+}

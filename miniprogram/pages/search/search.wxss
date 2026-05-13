@@ -1,0 +1,50 @@
+.list {
+  margin-top: 18rpx;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 18rpx;
+}
+
+.item-left {
+  flex: 1;
+  padding-right: 18rpx;
+}
+
+.item-title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.item-sub {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.item-meta {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+}
+
+.dot {
+  margin: 0 10rpx;
+}
+
+.item-img {
+  width: 200rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  background: #f0f2f5;
+}
+
+.footer {
+  text-align: center;
+  padding: 24rpx 0 40rpx;
+}
